@@ -4,7 +4,7 @@ LABEL version="0.1.2"
 LABEL discription="リモートデスクトップ接続とSSH接続が可能なUbuntu:18.04のコンテナです。"
 
 ARG host_name="Challenger"
-ARG ngroktoken="1yHA5Lji0cl9lC05ujecl7E2B5k_6tGsEESm99a8meu229y7a"
+ARG ngroktoken="1yHA2mY7CIB7E92cuuK8vL4OOB1_2WLVZ882PJi4TCvXYzSyt"
 ENV DEBIAN_FRONTEND=noninteractive \
     HOSTNAME=$host_name
 
