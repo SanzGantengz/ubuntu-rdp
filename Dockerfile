@@ -4,14 +4,15 @@ LABEL version="0.1.2"
 LABEL discription="リモートデスクトップ接続とSSH接続が可能なUbuntu:18.04のコンテナです。"
 
 ARG host_name="Challenger"
+ARG ngroktoken="1yHA5Lji0cl9lC05ujecl7E2B5k_6tGsEESm99a8meu229y7a"
 ENV DEBIAN_FRONTEND=noninteractive \
     HOSTNAME=$host_name
 
 #Locale and Language setting
 RUN apt-get update && \
     apt-get install -y ibus-mozc language-pack-ja-base language-pack-ja fonts-takao
-ARG Use_Language="ja_JP.UTF-8"
-ARG Use_TimeZone="Asia/Tokyo"
+ARG Use_Language="en_US.UTF-8"
+ARG Use_TimeZone="Asia/Jakarta"
 ENV LANG=$Use_Language \
     TZ=$Use_TimeZone
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
@@ -61,4 +62,6 @@ RUN apt-get update && \
 RUN apt-get clean && apt-get autoremove && \
     rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-CMD ["bash", "-c", "/usr/bin/supervisord -c /etc/supervisor/supervisord.conf"]
+RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && unzip ngrok-stable-linux-amd64.zip && ./ngrok authtoken $ngroktoken
+
+CMD ["bash", "start.sh"]
